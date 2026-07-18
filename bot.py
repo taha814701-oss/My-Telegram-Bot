@@ -1,22 +1,23 @@
-import asyncio
-from telegram import Update
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 TOKEN = "1713259160:AAGxXKBTX9j7Pe31cBMOAmzcLsp70HMwAF8"
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("سلام! 🤖 من رباتت هستم.")
+def start(update, context):
+    update.message.reply_text("سلام! 🤖 من رباتت هستم.")
 
-async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"گفتی: {update.message.text}")
+def echo(update, context):
+    update.message.reply_text(f"گفتی: {update.message.text}")
 
 def main():
-    app = Application.builder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
+    updater = Updater(TOKEN, use_context=True)
+    dp = updater.dispatcher
+    
+    dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
     
     print("ربات روشن شد...")
-    app.run_polling()
+    updater.start_polling()
+    updater.idle()
 
 if __name__ == "__main__":
     main()
