@@ -3,7 +3,7 @@ import asyncio
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
-TOKEN = "توکن_ربات_ت_اینجا"
+TOKEN = "1713259160:AAGxXKBTX9j7Pe31cBMOAmzcLsp70HMwAF8"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("سلام! 🤖 من رباتت هستم.")
